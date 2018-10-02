@@ -1,0 +1,58 @@
+{
+  "name": "typeorm-webhook-extensions",
+  "version": "0.0.1",
+  "description": "Simply add Webhooks to your TypeORM models",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/test/test-setup/index.ts",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js?|ts?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "node"
+    ]
+  },
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuaslate/typeorm-webhook-extensions.git"
+  },
+  "keywords": [
+    "typeorm",
+    "webhooks"
+  ],
+  "author": "Joshua Anderson Slate",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joshuaslate/typeorm-webhook-extensions/issues"
+  },
+  "homepage": "https://github.com/joshuaslate/typeorm-webhook-extensions#readme",
+  "peerDependencies": {
+    "typeorm": "^0.2.7"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "@types/koa": "^2.0.46",
+    "@types/koa-bodyparser": "^5.0.1",
+    "@types/node-fetch": "^2.1.2",
+    "jest": "^23.6.0",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "sqlite3": "^4.0.2",
+    "ts-jest": "^23.10.3",
+    "typeorm": "^0.2.7",
+    "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  }
+}
