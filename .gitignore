@@ -62,3 +62,5 @@ typings/
 
 # Test database
 typeorm-webhook-extensions_test_db.sql
+
+dist
