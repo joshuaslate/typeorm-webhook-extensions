@@ -1,6 +1,6 @@
 {
   "name": "typeorm-webhook-extensions",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simply add Webhooks to your TypeORM models",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
