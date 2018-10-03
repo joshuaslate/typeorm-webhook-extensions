@@ -1,8 +1,8 @@
-import { WebhookActionLogger, WebhookErrorHandler } from './';
+import { WebhookActionLogger, WebhookEndpointBuilder, WebhookErrorHandler } from './';
 
 export interface TypeORMWebhookExtensionsOptions {
   okStatuses?: number[];
-  webhookEndpoint?: string;
+  webhookEndpoint?: string | string[] | WebhookEndpointBuilder;
   onError?: WebhookErrorHandler;
   onSuccess?: WebhookActionLogger;
 };

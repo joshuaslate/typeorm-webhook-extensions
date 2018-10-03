@@ -25,8 +25,8 @@ import webhookExtension, { Webhook } from 'typeorm-webhook-extensions';
   sendOnLoad: true,
   sendOnRemove: true,
   sendOnUpdate: true,
-  onSuccess: mockOnSuccess,
-  onError: mockOnError,
+  onError: (error) => { console.log(error); },
+  onSuccess: (endpoint, status, payload) => { console.log(endpoint, status, payload )},
 })
 class User {
   @PrimaryGeneratedColumn()
@@ -47,11 +47,20 @@ interface WebhookOptions {
   sendOnUpdate?: boolean | WebhookFormatter;
   sendOnRemove?: boolean | WebhookFormatter;
   sendOnInsert?: boolean | WebhookFormatter;
-  webhookEndpoint?: string;
+  webhookEndpoint?: string | string | WebhookEndpointBuilder;
   okStatuses?: number[];
   onError?: WebhookErrorHandler;
   onSuccess?: WebhookActionLogger;
 };
+```
+
+`WebhookEndpointBuilder` is an asynchronous function that returns `Promise<string | string[]>`. If you need to send events to different webhook URLs based on information in the entity, this is approximately how you can do so:
+
+```ts
+const getWebhookEndpoints = async (entity: any) => {
+  const companyEndpoints = await getConnection().query(`SELECT webhook_endpoint FROM companies WHERE owner_id=${entity.id};`);
+  return companyEndpoints.map(company => company.webhook_endpoint);
+}
 ```
 
 If true is passed to `sendOnLoad`, `sendOnUpdate`, `sendOnRemove`, or `sendOnInsert`, a payload containing the non-function properties from your entity along with webhookType will be sent to your specified webhook. Optionally, you may pass a `WebhookFormatter` function in for any of these options. The `WebhookFormatter` receives the instance of the entity as its sole argument. For example, this would exclude the (hopefully hashed) password from being sent to the webhook endpoint:
